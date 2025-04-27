@@ -1,0 +1,7 @@
+.sidebar-navLink {
+    @apply transition-colors;
+}
+
+.sidebar-navLink.active {
+    @apply font-semibold text-purple-300;
+}
