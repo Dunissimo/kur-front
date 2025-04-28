@@ -27,8 +27,6 @@ export function getId(itemName: string, item: Item) {
 }
 
 export function transformDataForSend(values: FormSchema) {
-    console.log(values);
-
     if ('statusNumber' in values) {
         return {
             StatusID: Number(values.statusNumber),
@@ -61,10 +59,17 @@ export function transformDataForSend(values: FormSchema) {
         return {
             NameWS: values.workshopName,
         };
+    } else if ('NamePodship' in values) {
+        return {
+            NamePodship: values.podshipName,
+            WorkShopID: values.workshopId,
+        };
     }
 }
 
 export function transformDataForEdit(item: Item) {
+    console.log(item);
+
     if ('idProcess' in item) {
         return {
             statusNumber: String(item.StatusID) || '',
@@ -92,6 +97,11 @@ export function transformDataForEdit(item: Item) {
     } else if ('idWorkshop' in item) {
         return {
             workshopName: item.NameWS || '',
+        };
+    } else if ('idPodship' in item) {
+        return {
+            podshipName: item.NamePodship,
+            workshopId: item.WorkShopID,
         };
     }
 }

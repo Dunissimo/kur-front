@@ -1,4 +1,5 @@
 import App from '@/App';
+import PodshipPage from '@/pages/PodshipPage';
 import ProcessPage from '@/pages/ProcessPage';
 import StagePage from '@/pages/StagePage';
 import StatusPage from '@/pages/StatusPage';
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
             {
                 path: '/zakaz',
                 Component: ZakazPage,
+            },
+            {
+                path: '/podship',
+                Component: PodshipPage,
             },
         ],
     },

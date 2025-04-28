@@ -3,6 +3,7 @@ import {
     deleteProcess,
     getAllProcesses,
     getOneProcess,
+    mapProcessData,
     updateProcess,
 } from '@/api/process';
 import {
@@ -28,10 +29,10 @@ function ProcessPage() {
             queryKey="all-processes"
             tableHead={[
                 'Номер процесса',
-                'Номер статуса',
+                'Cтатус',
                 'Номер заказа',
-                'Номер этапа',
-                'Номер цеха',
+                'Этап',
+                'Цех',
                 'Начальная дата',
                 'Финишная дата',
             ]}
@@ -43,6 +44,7 @@ function ProcessPage() {
             create={createProcess}
             update={updateProcess}
             remove={deleteProcess}
+            mapDataToTableBody={mapProcessData}
         />
     );
 }

@@ -3,6 +3,7 @@ import {
     Briefcase,
     ChartNoAxesColumnDecreasing,
     Cpu,
+    Factory,
     ShoppingCart,
 } from 'lucide-react';
 import {
@@ -42,6 +43,11 @@ const items = [
         title: 'Цехи',
         url: 'workshop',
         icon: Briefcase,
+    },
+    {
+        title: 'Подшипники',
+        url: 'podship',
+        icon: Factory,
     },
 ];
 

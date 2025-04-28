@@ -8,7 +8,7 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import RemoveTableItem from './RemoveTableItem';
-import { Item } from '@/lib/types';
+import { Item, ItemType } from '@/lib/types';
 import { getId } from '@/lib/utils';
 import { isDate } from 'date-fns';
 import EditTableItem from './EditTableItem';
@@ -17,7 +17,7 @@ interface TableProps {
     caption: string;
     head: string[];
     body?: Item[];
-    itemName: 'process' | 'status' | 'zakaz' | 'stage' | 'workshop';
+    itemName: ItemType;
     removeFn: (id: number) => void;
     setEditOpen: (open: boolean) => void;
     setEditId: (id: number) => void;
