@@ -78,3 +78,8 @@ export type ItemType =
     | 'stage'
     | 'workshop'
     | 'podship';
+
+export interface LoginDto {
+    username: string;
+    password: string;
+}
