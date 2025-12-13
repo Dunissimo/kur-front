@@ -15,6 +15,16 @@ function StageFormFields({ form }: StageFormFieldsProps) {
                 label="Название этапа"
                 control={form.control}
             />
+            <TextInputField
+                name="stageDescription"
+                label="Описание этапа"
+                control={form.control}
+            />
+            <TextInputField
+                name="stageWorkshopId"
+                label="Номер цеха"
+                control={form.control}
+            />
         </>
     );
 }

@@ -45,8 +45,8 @@ const items = [
         icon: Briefcase,
     },
     {
-        title: 'Подшипники',
-        url: 'podship',
+        title: 'Продукция',
+        url: 'product',
         icon: Factory,
     },
 ];

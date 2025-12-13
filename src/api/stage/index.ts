@@ -21,3 +21,13 @@ export function updateStage(id: number, dto: UpdateStageDto) {
 export function deleteStage(id: number) {
     return api.delete(`/stage/${id}`);
 }
+
+export function mapStageData(data: Stage[]) {
+    return data.map((stage) => ({
+        idStages: stage.idStages,
+        NameStages: stage.NameStages,
+        DescriptionStages: stage.DescriptionStages,
+        NameWS: stage.Workshop.NameWS,
+        WorkshopId: stage.Workshop.idWorkshop,
+    }));
+}

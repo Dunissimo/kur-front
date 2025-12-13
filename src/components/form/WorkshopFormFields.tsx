@@ -15,6 +15,11 @@ function WorkshopFormFields({ form }: WorkshopFormFieldsProps) {
                 label="Название цеха"
                 control={form.control}
             />
+            <TextInputField
+                name="workshopMaxLoad"
+                label="Максимальная загрузка"
+                control={form.control}
+            />
         </>
     );
 }

@@ -1,4 +1,4 @@
-import { PodshipFormSchema } from './form-schemas/podshipFormSchemas';
+import { ProductFormSchema } from './form-schemas/productFormSchemas';
 import { ProcessFormSchema } from './form-schemas/processFormSchemas';
 import { StageFormSchema } from './form-schemas/stageFormSchemas';
 import { StatusFormSchema } from './form-schemas/statusFormSchemas';
@@ -29,6 +29,8 @@ export type UpdateStatusDto = Partial<CreateStatusDto>;
 export interface Stage {
     idStages: number;
     NameStages: string;
+    DescriptionStages: string;
+    Workshop: Workshop;
 }
 
 export type CreateStageDto = Omit<Stage, 'idStages'>;
@@ -48,28 +50,29 @@ export type UpdateZakazDto = Partial<CreateZakazDto>;
 export interface Workshop {
     idWorkshop: number;
     NameWS: string;
+    CurrentLoadWS: number;
+    MaxLoadWS: number;
 }
 
 export type CreateWorkshopDto = Workshop;
 export type UpdateWorkshopDto = Partial<CreateWorkshopDto>;
 
-export interface Podship {
-    idPodship: number;
-    NamePodship: string;
-    WorkShopID: Workshop;
+export interface Product {
+    idProduct: number;
+    NameProduct: string;
 }
 
-export type CreatePodshipDto = Podship;
-export type UpdatePodshipDto = Partial<CreatePodshipDto>;
+export type CreateProductDto = Product;
+export type UpdateProductDto = Partial<CreateProductDto>;
 
-export type Item = Process | Status | Stage | Zakaz | Workshop | Podship;
+export type Item = Process | Status | Stage | Zakaz | Workshop | Product;
 export type FormSchema =
     | ProcessFormSchema
     | StageFormSchema
     | StatusFormSchema
     | ZakazFormSchema
     | WorkshopFormSchema
-    | PodshipFormSchema;
+    | ProductFormSchema;
 
 export type ItemType =
     | 'process'
@@ -77,7 +80,7 @@ export type ItemType =
     | 'status'
     | 'stage'
     | 'workshop'
-    | 'podship';
+    | 'product';
 
 export interface LoginDto {
     username: string;

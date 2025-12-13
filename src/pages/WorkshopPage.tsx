@@ -27,7 +27,12 @@ function WorkshopPage() {
                 listOfString="цехов"
                 itemName="workshop"
                 queryKey="all-workshops"
-                tableHead={['Номер цеха', 'Название цеха']}
+                tableHead={[
+                    'Номер цеха',
+                    'Название цеха',
+                    'Максимальная загрузка',
+                    'Текущая загрузка',
+                ]}
                 formFields={(form) => <WorkshopFormFields form={form} />}
                 defaultValues={WORKSHOP_DEFAULT_VALUES}
                 schema={workshopFormSchema}

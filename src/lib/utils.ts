@@ -18,6 +18,7 @@ const idMaps = {
     zakaz: 'idZakaz',
     stage: 'idStages',
     workshop: 'idWorkshop',
+    product: 'idProduct',
 };
 
 export function getId(itemName: string, item: Item) {
@@ -43,6 +44,8 @@ export function transformDataForSend(values: FormSchema) {
     } else if ('stageName' in values) {
         return {
             NameStages: values.stageName,
+            DescriptionStages: values.stageDescription,
+            WorkshopId: values.stageWorkshopId,
         };
     } else if ('statusName' in values) {
         return {
@@ -58,11 +61,11 @@ export function transformDataForSend(values: FormSchema) {
     } else if ('workshopName' in values) {
         return {
             NameWS: values.workshopName,
+            MaxLoadWS: values.workshopMaxLoad,
         };
-    } else if ('NamePodship' in values) {
+    } else if ('productName' in values) {
         return {
-            NamePodship: values.podshipName,
-            WorkShopID: values.workshopId,
+            NameProduct: values.productName,
         };
     }
 }
@@ -80,8 +83,12 @@ export function transformDataForEdit(item: Item) {
             finishDate: new Date(item.FinishDate),
         };
     } else if ('idStages' in item) {
+        console.log('ssss ', item);
+
         return {
             stageName: item.NameStages || '',
+            stageDescription: item.DescriptionStages || '',
+            stageWorkshopId: String(item.Workshop?.idWorkshop || ''),
         };
     } else if ('idStatus' in item) {
         return {
@@ -97,11 +104,11 @@ export function transformDataForEdit(item: Item) {
     } else if ('idWorkshop' in item) {
         return {
             workshopName: item.NameWS || '',
+            workshopMaxLoad: item.MaxLoadWS || '',
         };
-    } else if ('idPodship' in item) {
+    } else if ('idProduct' in item) {
         return {
-            podshipName: item.NamePodship,
-            workshopId: item.WorkShopID,
+            productName: item.NameProduct || '',
         };
     }
 }

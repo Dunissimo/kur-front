@@ -1,5 +1,5 @@
 import App from '@/App';
-import PodshipPage from '@/pages/PodshipPage';
+import ProductPage from '@/pages/ProductPage';
 import ProcessPage from '@/pages/ProcessPage';
 import StagePage from '@/pages/StagePage';
 import StatusPage from '@/pages/StatusPage';
@@ -33,8 +33,8 @@ export const router = createBrowserRouter([
                 Component: ZakazPage,
             },
             {
-                path: '/podship',
-                Component: PodshipPage,
+                path: '/product',
+                Component: ProductPage,
             },
         ],
     },

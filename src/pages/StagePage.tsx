@@ -3,6 +3,7 @@ import {
     deleteStage,
     getAllStages,
     getOneStage,
+    mapStageData,
     updateStage,
 } from '@/api/stage';
 import {
@@ -26,7 +27,7 @@ function StagePage() {
             listOfString="этапов"
             itemName="stage"
             queryKey="all-stages"
-            tableHead={['Номер этапа', 'Название этапа']}
+            tableHead={['Номер этапа', 'Название этапа', 'Описание', 'Цех']}
             formFields={(form) => <StageFormFields form={form} />}
             defaultValues={STAGE_DEFAULT_VALUES}
             schema={stageFormSchema}
@@ -35,6 +36,7 @@ function StagePage() {
             create={createStage}
             update={updateStage}
             remove={deleteStage}
+            mapDataToTableBody={mapStageData}
         />
     );
 }
