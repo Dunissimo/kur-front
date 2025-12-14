@@ -11,5 +11,5 @@ export type WorkshopFormSchema = z.infer<typeof workshopFormSchema>;
 export type WorkshopDefaultFormSchema = Partial<WorkshopFormSchema>;
 export const WORKSHOP_DEFAULT_VALUES = {
     workshopName: '',
-    workshopMaxLoad: 1,
+    workshopMaxLoad: '',
 };
