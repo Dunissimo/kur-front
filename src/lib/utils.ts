@@ -71,8 +71,6 @@ export function transformDataForSend(values: FormSchema) {
 }
 
 export function transformDataForEdit(item: Item) {
-    console.log(item);
-
     if ('idProcess' in item) {
         return {
             statusNumber: String(item.StatusID) || '',
@@ -83,8 +81,6 @@ export function transformDataForEdit(item: Item) {
             finishDate: new Date(item.FinishDate),
         };
     } else if ('idStages' in item) {
-        console.log('ssss ', item);
-
         return {
             stageName: item.NameStages || '',
             stageDescription: item.DescriptionStages || '',

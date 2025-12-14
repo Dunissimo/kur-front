@@ -28,6 +28,5 @@ export function mapStageData(data: Stage[]) {
         NameStages: stage.NameStages,
         DescriptionStages: stage.DescriptionStages,
         NameWS: stage.Workshop.NameWS,
-        WorkshopId: stage.Workshop.idWorkshop,
     }));
 }

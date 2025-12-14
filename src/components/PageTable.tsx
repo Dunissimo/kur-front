@@ -52,6 +52,8 @@ function PageTable({
                     return (
                         <TableRow key={index}>
                             {Object.values(item).map((value, index) => {
+                                console.log(item);
+
                                 if (value instanceof Object) return;
 
                                 let processdValue = value;

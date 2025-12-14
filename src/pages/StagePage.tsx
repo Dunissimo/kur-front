@@ -17,13 +17,8 @@ import StageFormFields from '@/components/form/StageFormFields';
 
 function StagePage() {
     return (
-        <PageTemplate<
-            CreateStageDto,
-            UpdateStageDto,
-            StageFormSchema,
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            any
-        >
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        <PageTemplate<CreateStageDto, UpdateStageDto, StageFormSchema, any>
             listOfString="этапов"
             itemName="stage"
             queryKey="all-stages"

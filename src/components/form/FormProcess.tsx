@@ -74,8 +74,6 @@ function FormProcess({
         if (type === 'edit' && editId) {
             editMutation.mutate({ id: editId, data });
         } else if (type === 'create' && addMutation) {
-            console.log(data);
-
             addMutation.mutate(data);
         }
     };
