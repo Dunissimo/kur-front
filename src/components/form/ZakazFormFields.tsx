@@ -1,7 +1,6 @@
 import { UseFormReturn } from 'react-hook-form';
 import TextInputField from './TextInputField';
 import { ZakazFormSchema } from '@/lib/form-schemas/zakazFormSchemas';
-import DateInputField from './DateInputField';
 
 interface ZakazFormFieldsProps {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -11,13 +10,17 @@ interface ZakazFormFieldsProps {
 function ZakazFormFields({ form }: ZakazFormFieldsProps) {
     return (
         <>
-            <DateInputField name="kogda" label="Когда" control={form.control} />
             <TextInputField
-                name="zakazcol"
+                name="productId"
+                label="Номер продукции"
+                control={form.control}
+            />
+            <TextInputField
+                name="zakazQuantity"
                 label="Количество"
                 control={form.control}
             />
-            <TextInputField name="for" label="Для" control={form.control} />
+            <TextInputField name="for" label="Клиент" control={form.control} />
             <TextInputField
                 name="comment"
                 label="Комментарий"

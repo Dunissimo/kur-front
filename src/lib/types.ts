@@ -38,8 +38,11 @@ export type UpdateStageDto = Partial<CreateStageDto>;
 
 export interface Zakaz {
     idZakaz: number;
-    Kogda: Date | null;
-    Zakazcol: number;
+    productId: number;
+    product: Product;
+    zakazQuantity: number;
+    zakazCreated: Date;
+    zakazCompleted: Date | null;
     For: string;
     Comment: string;
 }

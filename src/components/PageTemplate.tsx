@@ -1,26 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
-import {
-    DefaultValues,
-    FieldValues,
-    useForm,
-    UseFormReturn,
-} from 'react-hook-form';
-import { toast } from 'sonner';
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogTitle,
-    DialogTrigger,
-} from '@/components/ui/dialog';
-import { Button } from './ui/button';
-import FormProcess from './form/FormProcess';
+import { DefaultValues, FieldValues, UseFormReturn } from 'react-hook-form';
 import { ItemType } from '@/lib/types';
 import PageTable from './PageTable';
 import { AxiosResponse } from 'axios';
+import CreateDialog from './CreateDialog';
+import UpdateDialog from './UpdateDialog';
 
 interface PageTemplateProps<
     TCreate,
@@ -65,7 +51,6 @@ export default function PageTemplate<
     remove,
     mapDataToTableBody,
 }: PageTemplateProps<TCreate, TUpdate, TSchema, TData>) {
-    const [createOpen, setCreateOpen] = useState(false);
     const [editOpen, setEditOpen] = useState(false);
     const [currentEditId, setEditId] = useState<number | null>(null);
     const queryClient = useQueryClient();
@@ -73,33 +58,6 @@ export default function PageTemplate<
     const { data, error } = useQuery({
         queryKey: [queryKey],
         queryFn: getAll,
-    });
-
-    const form = useForm<TSchema>({
-        resolver: zodResolver(schema),
-        mode: 'onChange',
-        defaultValues,
-    });
-
-    const addMutation = useMutation({
-        mutationFn: (data: TCreate) => create(data),
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: [queryKey] });
-
-            setCreateOpen(false);
-
-            toast.success(`${itemName} успешно создан`);
-        },
-    });
-
-    const editMutation = useMutation({
-        mutationFn: ({ id, data }: { id: number; data: TUpdate }) =>
-            update(id, data),
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: [queryKey] });
-            setEditOpen(false);
-            toast.success(`${itemName} успешно обновлен`);
-        },
     });
 
     const removeMutation = useMutation({
@@ -113,42 +71,27 @@ export default function PageTemplate<
 
     return (
         <div>
-            <Dialog open={createOpen} onOpenChange={setCreateOpen}>
-                <DialogTrigger asChild>
-                    <Button variant="secondary" className="mb-4">
-                        Создать
-                    </Button>
-                </DialogTrigger>
-                <DialogContent>
-                    <DialogTitle className="text-center">Создать</DialogTitle>
-                    <DialogDescription />
+            <CreateDialog<TCreate, TSchema>
+                create={create}
+                defaultValues={defaultValues}
+                formFields={formFields}
+                itemName={itemName}
+                queryKey={queryKey}
+                schema={schema}
+            />
 
-                    <FormProcess
-                        type="create"
-                        addMutation={addMutation}
-                        form={form}
-                    >
-                        {formFields(form)}
-                    </FormProcess>
-                </DialogContent>
-            </Dialog>
-
-            <Dialog open={editOpen} onOpenChange={setEditOpen}>
-                <DialogContent>
-                    <DialogTitle className="text-center">Изменить</DialogTitle>
-                    <DialogDescription />
-                    <FormProcess
-                        type="edit"
-                        getFn={getOne}
-                        itemName={itemName}
-                        editId={currentEditId}
-                        editMutation={editMutation}
-                        form={form}
-                    >
-                        {formFields(form)}
-                    </FormProcess>
-                </DialogContent>
-            </Dialog>
+            <UpdateDialog
+                currentEditId={currentEditId}
+                defaultValues={defaultValues}
+                itemName={itemName}
+                queryKey={queryKey}
+                schema={schema}
+                editOpen={editOpen}
+                formFields={formFields}
+                getOne={getOne}
+                update={update}
+                setEditOpen={setEditOpen}
+            />
 
             <PageTable
                 caption={`Список ${listOfString}`}

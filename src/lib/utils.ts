@@ -51,10 +51,10 @@ export function transformDataForSend(values: FormSchema) {
         return {
             StatusName: values.statusName,
         };
-    } else if ('zakazcol' in values) {
+    } else if ('zakazQuantity' in values) {
         return {
-            Kogda: values.kogda ? format(values.kogda, 'yyyy-MM-dd') : '',
-            Zakazcol: Number(values.zakazcol),
+            productId: Number(values.productId),
+            zakazQuantity: Number(values.zakazQuantity),
             For: values.for,
             Comment: values.comment,
         };
@@ -88,7 +88,7 @@ export function transformDataForEdit(item: Item) {
         return {
             stageName: item.NameStages || '',
             stageDescription: item.DescriptionStages || '',
-            stageWorkshopId: String(item.Workshop?.idWorkshop || ''),
+            stageWorkshopId: String(item.Workshop?.idWorkshop) || '',
         };
     } else if ('idStatus' in item) {
         return {
@@ -96,10 +96,10 @@ export function transformDataForEdit(item: Item) {
         };
     } else if ('idZakaz' in item) {
         return {
-            kogda: item.Kogda ? new Date(item.Kogda) : null,
-            zakazcol: String(item.Zakazcol) || '',
             for: item.For || '',
             comment: item.Comment || '',
+            productId: String(item.productId) || '',
+            zakazQuantity: String(item.zakazQuantity) || '',
         };
     } else if ('idWorkshop' in item) {
         return {

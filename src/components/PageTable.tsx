@@ -52,6 +52,8 @@ function PageTable({
                     return (
                         <TableRow key={index}>
                             {Object.values(item).map((value, index) => {
+                                if (value instanceof Object) return;
+
                                 let processdValue = value;
 
                                 if (isDate(value)) {
@@ -59,6 +61,17 @@ function PageTable({
                                         value,
                                     ).toLocaleDateString('ru-RU', {
                                         dateStyle: 'medium',
+                                    });
+                                }
+
+                                if (
+                                    typeof value === 'string' &&
+                                    !isNaN(Date.parse(value))
+                                ) {
+                                    processdValue = new Date(
+                                        value,
+                                    ).toLocaleDateString('ru-RU', {
+                                        dateStyle: 'short',
                                     });
                                 }
 
