@@ -19,6 +19,7 @@ const idMaps = {
     stage: 'idStages',
     workshop: 'idWorkshop',
     product: 'idProduct',
+    'product-stage': 'idProductStages',
 };
 
 export function getId(itemName: string, item: Item) {
@@ -67,6 +68,14 @@ export function transformDataForSend(values: FormSchema) {
         return {
             NameProduct: values.productName,
         };
+    } else if ('durationValue' in values) {
+        return {
+            productId: Number(values.productId),
+            stageId: Number(values.stageId),
+            sort: Number(values.sort),
+            durationId: 2,
+            durationValue: Number(values.durationValue),
+        };
     }
 }
 
@@ -105,6 +114,13 @@ export function transformDataForEdit(item: Item) {
     } else if ('idProduct' in item) {
         return {
             productName: item.NameProduct || '',
+        };
+    } else if ('productId' in item && 'stageId' in item) {
+        return {
+            productId: String(item.productId) || '',
+            stageId: String(item.stageId) || '',
+            sort: String(item.sort) || '',
+            durationValue: String(item.durationValue) || '',
         };
     }
 }

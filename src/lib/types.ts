@@ -4,6 +4,7 @@ import { StageFormSchema } from './form-schemas/stageFormSchemas';
 import { StatusFormSchema } from './form-schemas/statusFormSchemas';
 import { WorkshopFormSchema } from './form-schemas/WorkshopFormSchemas';
 import { ZakazFormSchema } from './form-schemas/zakazFormSchemas';
+import { ProductStageFormSchema } from './form-schemas/productStageFormSchemas';
 
 export interface Process {
     idProcess: number;
@@ -68,14 +69,42 @@ export interface Product {
 export type CreateProductDto = Product;
 export type UpdateProductDto = Partial<CreateProductDto>;
 
-export type Item = Process | Status | Stage | Zakaz | Workshop | Product;
+export interface Duration {
+    id: number;
+    name: string;
+}
+
+export interface ProductStage {
+    idProductStages: number;
+    productId: number;
+    product: Product;
+    stageId: number;
+    stage: Stage;
+    sort: number;
+    durationId: number;
+    duration: Duration;
+    durationValue: number;
+}
+
+export type CreateProductStageDto = Omit<ProductStage, 'idProductStages'>;
+export type UpdateProductStageDto = Partial<CreateProductStageDto>;
+
+export type Item =
+    | Process
+    | Status
+    | Stage
+    | Zakaz
+    | Workshop
+    | Product
+    | ProductStage;
 export type FormSchema =
     | ProcessFormSchema
     | StageFormSchema
     | StatusFormSchema
     | ZakazFormSchema
     | WorkshopFormSchema
-    | ProductFormSchema;
+    | ProductFormSchema
+    | ProductStageFormSchema;
 
 export type ItemType =
     | 'process'
@@ -83,7 +112,8 @@ export type ItemType =
     | 'status'
     | 'stage'
     | 'workshop'
-    | 'product';
+    | 'product'
+    | 'product-stage';
 
 export interface LoginDto {
     username: string;

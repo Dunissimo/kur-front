@@ -8,10 +8,12 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import RemoveTableItem from './RemoveTableItem';
-import { Item, ItemType } from '@/lib/types';
+import { Item, ItemType, Product } from '@/lib/types';
 import { getId } from '@/lib/utils';
 import { isDate } from 'date-fns';
 import EditTableItem from './EditTableItem';
+import { Button } from './ui/button';
+import { NavLink } from 'react-router';
 
 interface TableProps {
     caption: string;
@@ -52,8 +54,6 @@ function PageTable({
                     return (
                         <TableRow key={index}>
                             {Object.values(item).map((value, index) => {
-                                console.log(item);
-
                                 if (value instanceof Object) return;
 
                                 let processdValue = value;
@@ -66,16 +66,16 @@ function PageTable({
                                     });
                                 }
 
-                                if (
-                                    typeof value === 'string' &&
-                                    !isNaN(Date.parse(value))
-                                ) {
-                                    processdValue = new Date(
-                                        value,
-                                    ).toLocaleDateString('ru-RU', {
-                                        dateStyle: 'short',
-                                    });
-                                }
+                                // if (
+                                //     typeof value === 'string' &&
+                                //     !isNaN(Date.parse(value))
+                                // ) {
+                                //     processdValue = new Date(
+                                //         value,
+                                //     ).toLocaleDateString('ru-RU', {
+                                //         dateStyle: 'short',
+                                //     });
+                                // }
 
                                 return (
                                     <TableCell key={index}>
@@ -83,6 +83,16 @@ function PageTable({
                                     </TableCell>
                                 );
                             })}
+
+                            {itemName === 'product' && (
+                                <TableCell className="w-[50px] pr-8">
+                                    <NavLink
+                                        to={`${(item as Product).idProduct}/stages`}
+                                    >
+                                        <Button>Этапы изготовления</Button>
+                                    </NavLink>
+                                </TableCell>
+                            )}
 
                             <TableCell className="w-[30px]">
                                 <EditTableItem

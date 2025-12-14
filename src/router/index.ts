@@ -6,6 +6,8 @@ import StatusPage from '@/pages/StatusPage';
 import WorkshopPage from '@/pages/WorkshopPage';
 import ZakazPage from '@/pages/ZakazPage';
 import { createBrowserRouter } from 'react-router';
+import ProductStage from '@/pages/ProductStage';
+import ProductStagePage from '@/pages/ProductStagePage';
 
 export const router = createBrowserRouter([
     {
@@ -35,6 +37,14 @@ export const router = createBrowserRouter([
             {
                 path: '/product',
                 Component: ProductPage,
+            },
+            {
+                path: '/product-stage',
+                Component: ProductStagePage,
+            },
+            {
+                path: '/product/:id/stages',
+                Component: ProductStage,
             },
         ],
     },

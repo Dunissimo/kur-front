@@ -49,6 +49,11 @@ const items = [
         url: 'product',
         icon: Factory,
     },
+    {
+        title: 'Этапы Продукции',
+        url: 'product-stage',
+        icon: Factory,
+    },
 ];
 
 function AppSidebar() {
