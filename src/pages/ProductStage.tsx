@@ -5,7 +5,6 @@ import { useQuery } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router';
 import {
     Card,
-    CardAction,
     CardContent,
     CardDescription,
     CardHeader,
@@ -36,7 +35,8 @@ function ProductStage() {
 
                 <div className="flex flex-col gap-8">
                     {data?.data.productStages.map(
-                        ({ stage, durationValue }, index) => (
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        ({ stage, durationValue }: any, index: number) => (
                             <Card className="max-w-1/2">
                                 <CardHeader>
                                     <CardTitle>
