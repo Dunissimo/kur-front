@@ -1,7 +1,6 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { FormSchema, Item } from './types';
-import { format } from 'date-fns';
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -13,13 +12,13 @@ export function formatDate(date: string) {
 }
 
 const idMaps = {
-    process: 'idProcess',
     status: 'idStatus',
     zakaz: 'idZakaz',
     stage: 'idStages',
     workshop: 'idWorkshop',
     product: 'idProduct',
     'product-stage': 'idProductStages',
+    user: 'id',
 };
 
 export function getId(itemName: string, item: Item) {
@@ -29,20 +28,7 @@ export function getId(itemName: string, item: Item) {
 }
 
 export function transformDataForSend(values: FormSchema) {
-    if ('statusNumber' in values) {
-        return {
-            StatusID: Number(values.statusNumber),
-            ZakazID: Number(values.zakazNumber),
-            StagesID: Number(values.stageNumber),
-            WorkShopID: Number(values.workshopNumber),
-            StartDate: values.startDate
-                ? format(values.startDate, 'yyyy-MM-dd')
-                : '',
-            FinishDate: values.finishDate
-                ? format(values.finishDate, 'yyyy-MM-dd')
-                : '',
-        };
-    } else if ('stageName' in values) {
+    if ('stageName' in values) {
         return {
             NameStages: values.stageName,
             DescriptionStages: values.stageDescription,
@@ -76,20 +62,17 @@ export function transformDataForSend(values: FormSchema) {
             durationId: 2,
             durationValue: Number(values.durationValue),
         };
+    } else if ('password' in values) {
+        return {
+            Name: values.name,
+            Password: values.password,
+            Login: values.login,
+        };
     }
 }
 
 export function transformDataForEdit(item: Item) {
-    if ('idProcess' in item) {
-        return {
-            statusNumber: String(item.StatusID) || '',
-            zakazNumber: String(item.ZakazID) || '',
-            stageNumber: String(item.StagesID) || '',
-            workshopNumber: String(item.WorkShopID) || '',
-            startDate: new Date(item.StartDate),
-            finishDate: new Date(item.FinishDate),
-        };
-    } else if ('idStages' in item) {
+    if ('idStages' in item) {
         return {
             stageName: item.NameStages || '',
             stageDescription: item.DescriptionStages || '',
@@ -121,6 +104,11 @@ export function transformDataForEdit(item: Item) {
             stageId: String(item.stageId) || '',
             sort: String(item.sort) || '',
             durationValue: String(item.durationValue) || '',
+        };
+    } else if ('idUser' in item) {
+        return {
+            name: item.Name,
+            login: item.Login,
         };
     }
 }

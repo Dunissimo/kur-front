@@ -2,9 +2,9 @@ import {
     ArrowsUpFromLine,
     Briefcase,
     ChartNoAxesColumnDecreasing,
-    Cpu,
     Factory,
     ShoppingCart,
+    User,
 } from 'lucide-react';
 import {
     Sidebar,
@@ -19,11 +19,6 @@ import {
 import { NavLink } from 'react-router';
 
 const items = [
-    {
-        title: 'Процессы',
-        url: 'process',
-        icon: Cpu,
-    },
     {
         title: 'Статусы',
         url: 'status',
@@ -53,6 +48,11 @@ const items = [
         title: 'Этапы Продукции',
         url: 'product-stage',
         icon: Factory,
+    },
+    {
+        title: 'Пользователи',
+        url: 'user',
+        icon: User,
     },
 ];
 

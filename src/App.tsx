@@ -6,6 +6,8 @@ import { Toaster } from './components/ui/sonner';
 
 import { useEffect, useState } from 'react';
 import LoginButton from './components/LoginButton';
+import { toast } from 'sonner';
+import { Button } from './components/ui/button';
 
 function App() {
     const [open, setOpen] = useState(false);
@@ -19,10 +21,17 @@ function App() {
         }
     }, []);
 
+    const handleLogout = () => {
+        localStorage.removeItem('user');
+        setIsAuth(false);
+
+        toast.success(`Вы вышли из системы`);
+    };
+
     if (!isAuth) {
         return (
             <main className="w-full">
-                <Header>
+                <Header setIsAuth={setIsAuth}>
                     <div></div>
 
                     <LoginButton
@@ -44,8 +53,12 @@ function App() {
             <AppSidebar />
 
             <main className="w-full">
-                <Header>
+                <Header setIsAuth={setIsAuth}>
                     <SidebarTrigger />
+
+                    <Button className="mr-2" onClick={handleLogout}>
+                        Выйти
+                    </Button>
                 </Header>
 
                 <div className="px-5">

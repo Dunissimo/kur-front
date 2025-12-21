@@ -1,23 +1,10 @@
 import { ProductFormSchema } from './form-schemas/productFormSchemas';
-import { ProcessFormSchema } from './form-schemas/processFormSchemas';
 import { StageFormSchema } from './form-schemas/stageFormSchemas';
 import { StatusFormSchema } from './form-schemas/statusFormSchemas';
 import { WorkshopFormSchema } from './form-schemas/WorkshopFormSchemas';
 import { ZakazFormSchema } from './form-schemas/zakazFormSchemas';
 import { ProductStageFormSchema } from './form-schemas/productStageFormSchemas';
-
-export interface Process {
-    idProcess: number;
-    StatusID: Status;
-    ZakazID: Zakaz;
-    StagesID: Stage;
-    WorkShopID: Workshop;
-    StartDate: string | Date;
-    FinishDate: string | Date;
-}
-
-export type CreateProcessDto = Omit<Process, 'idProcess'>;
-export type UpdateProcessDto = Partial<CreateProcessDto>;
+import { UserFormSchema } from './form-schemas/userSchema';
 
 export interface Status {
     idStatus: number;
@@ -41,11 +28,17 @@ export interface Zakaz {
     idZakaz: number;
     productId: number;
     product: Product;
+    stageId: number;
+    stage: Stage;
+    statusId: number;
+    status: Status;
     zakazQuantity: number;
     zakazCreated: Date;
     zakazCompleted: Date | null;
     For: string;
     Comment: string;
+    isCancelled: boolean;
+    isFinished: boolean;
 }
 
 export type CreateZakazDto = Zakaz;
@@ -74,6 +67,15 @@ export interface Duration {
     name: string;
 }
 
+export interface User {
+    idUser: number;
+    Name: string;
+    Login: string;
+}
+
+export type CreateUserDto = Pick<User, 'Name' | 'Login'>;
+export type UpdateUserDto = Partial<CreateUserDto>;
+
 export interface ProductStage {
     idProductStages: number;
     productId: number;
@@ -90,30 +92,30 @@ export type CreateProductStageDto = Omit<ProductStage, 'idProductStages'>;
 export type UpdateProductStageDto = Partial<CreateProductStageDto>;
 
 export type Item =
-    | Process
     | Status
     | Stage
     | Zakaz
     | Workshop
     | Product
-    | ProductStage;
+    | ProductStage
+    | User;
 export type FormSchema =
-    | ProcessFormSchema
     | StageFormSchema
     | StatusFormSchema
     | ZakazFormSchema
     | WorkshopFormSchema
     | ProductFormSchema
-    | ProductStageFormSchema;
+    | ProductStageFormSchema
+    | UserFormSchema;
 
 export type ItemType =
-    | 'process'
     | 'zakaz'
     | 'status'
     | 'stage'
     | 'workshop'
     | 'product'
-    | 'product-stage';
+    | 'product-stage'
+    | 'user';
 
 export interface LoginDto {
     username: string;

@@ -20,6 +20,7 @@ interface TableProps {
     head: string[];
     body?: Item[];
     itemName: ItemType;
+    isEditable: boolean;
     removeFn: (id: number) => void;
     setEditOpen: (open: boolean) => void;
     setEditId: (id: number) => void;
@@ -27,6 +28,7 @@ interface TableProps {
 
 function PageTable({
     itemName,
+    isEditable,
     caption,
     head,
     body,
@@ -94,13 +96,16 @@ function PageTable({
                                 </TableCell>
                             )}
 
-                            <TableCell className="w-[30px]">
-                                <EditTableItem
-                                    setEditId={setEditId}
-                                    setEditOpen={setEditOpen}
-                                    id={getId(itemName, item)}
-                                />
-                            </TableCell>
+                            {isEditable ? (
+                                <TableCell className="w-[30px]">
+                                    <EditTableItem
+                                        setEditId={setEditId}
+                                        setEditOpen={setEditOpen}
+                                        id={getId(itemName, item)}
+                                    />
+                                </TableCell>
+                            ) : null}
+
                             <TableCell className="w-[30px]">
                                 <RemoveTableItem
                                     fn={removeFn}

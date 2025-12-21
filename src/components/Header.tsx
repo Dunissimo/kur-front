@@ -1,5 +1,6 @@
 interface HeaderProps {
     children?: React.ReactNode;
+    setIsAuth: (value: boolean) => void;
 }
 
 function Header({ children }: HeaderProps) {

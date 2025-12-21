@@ -1,3 +1,4 @@
+import { Control, FieldValues, Path } from 'react-hook-form';
 import {
     FormControl,
     FormField,
@@ -7,18 +8,21 @@ import {
 } from '../ui/form';
 import { Input } from '../ui/input';
 
-interface TextInputFieldProps {
-    name: string;
+interface TextInputFieldProps<T extends FieldValues> {
+    name: Path<T>;
     label: string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    control: any;
+    control: Control<T>;
 }
 
-function TextInputField({ name, label, control }: TextInputFieldProps) {
+function TextInputField<T extends FieldValues>({
+    name,
+    label,
+    control,
+}: TextInputFieldProps<T>) {
     return (
         <FormField
             control={control}
-            name={String(name)}
+            name={name}
             render={({ field }) => (
                 <FormItem>
                     <FormLabel>{label}</FormLabel>

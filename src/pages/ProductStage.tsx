@@ -22,8 +22,6 @@ function ProductStage() {
         enabled: !!id,
     });
 
-    console.log();
-
     return (
         <>
             <Button onClick={() => navigate(-1)}>Вернуться</Button>

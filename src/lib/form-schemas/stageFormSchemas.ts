@@ -3,9 +3,15 @@ import { z } from 'zod';
 const REQUIRED_MESSAGE = 'Обязательно для заполнения';
 
 export const stageFormSchema = z.object({
-    stageName: z.string({ required_error: REQUIRED_MESSAGE }),
-    stageDescription: z.string({ required_error: REQUIRED_MESSAGE }),
-    stageWorkshopId: z.string({ required_error: REQUIRED_MESSAGE }),
+    stageName: z
+        .string()
+        .min(1, REQUIRED_MESSAGE)
+        .max(50, 'Слишком длинное название'),
+    stageDescription: z
+        .string()
+        .min(1, REQUIRED_MESSAGE)
+        .max(50, 'Слишком длинное название'),
+    stageWorkshopId: z.string().min(1, REQUIRED_MESSAGE),
 });
 
 export type StageFormSchema = z.infer<typeof stageFormSchema>;
